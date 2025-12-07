@@ -1,6 +1,16 @@
 let userRole = "admin";
 let accessLevel;
 
+let isLoggedIn = true;
+let userMessage;
+
+let userType = "subscriber";
+let userCategory;
+
+let isAuthenticated = true;
+let authenticationStatus = isAuthenticated ? "Authenticated" : "Not authenticated";
+
+
 if(userRole === "admin"){
     accessLevel = "Full access granted";
 } else if (userRole === "manager"){
@@ -10,10 +20,6 @@ if(userRole === "admin"){
 }
 
 console.log("Access Level:", accessLevel);
-
-let isLoggedIn = true;
-let userMessage;
-
 
 if (isLoggedIn) {
     if (userRole === "admin") {
@@ -27,8 +33,7 @@ if (isLoggedIn) {
 
 console.log("User Message:", userMessage);
 
-let userType = "subscriber";
-let userCategory;
+
 
 switch (userType) {
     case "admin":
@@ -45,3 +50,5 @@ switch (userType) {
 }
 
 console.log("User Category:", userCategory);
+
+console.log("Authentication Status:", authenticationStatus);
