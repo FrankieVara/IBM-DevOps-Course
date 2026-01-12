@@ -39,25 +39,26 @@ backupFileName="backup-${currentTS}.tar.gz"
 # [TASK 5] the absoulte path of the current directory as the variable's value
 origAbsPath=$(pwd)
 
-# [TASK 6]
+# [TASK 6] 
 cd destinationDirectory || exit # <-
 destDirAbsPath=$(pwd)
 
-# [TASK 7]
-cd # <-
-cd # <-
+# [TASK 7] travel to target directory
+cd origAbsPath # <-
+cd targetDirectory # <-
 
-# [TASK 8]
-yesterdayTS=
+# [TASK 8] timestamp 24 hours prior to the current timestamp,
+yesterdayTS=$((currentTS - 24 * 60 * 60))
 
 declare -a toBackup
 
-for file in  # [TASK 9]
+for file in * # [TASK 9] Use the wildcard to iterate over all files and directories
 do
-  # [TASK 10]
-  if (())
+  # [TASK 10] check if the file was mofified within the last 24 hrs
+  if [[`date -r $file +%s` -gt $yesterdayTS]]
   then
-    # [TASK 11]
+    # [TASK 11] add to the backup
+    toBackup+=($file)
   fi
 done
 
