@@ -40,12 +40,12 @@ backupFileName="backup-${currentTS}.tar.gz"
 origAbsPath=$(pwd)
 
 # [TASK 6] 
-cd destinationDirectory || exit # <-
+cd "$destinationDirectory" || exit # <-
 destDirAbsPath=$(pwd)
 
 # [TASK 7] travel to target directory
-cd origAbsPath # <-
-cd targetDirectory # <-
+cd $origAbsPath # <-
+cd $targetDirectory # <-
 
 # [TASK 8] timestamp 24 hours prior to the current timestamp,
 yesterdayTS=$((currentTS - 24 * 60 * 60))
@@ -55,10 +55,10 @@ declare -a toBackup
 for file in * # [TASK 9] Use the wildcard to iterate over all files and directories
 do
   # [TASK 10] check if the file was mofified within the last 24 hrs
-  if [[`date -r $file +%s` -gt $yesterdayTS]]
+  if [[ $(date -r "$file" +%s) -gt $yesterdayTS ]]
   then
     # [TASK 11] add to the backup
-    toBackup+=($file)
+    toBackup+=("$file")
   fi
 done
 
@@ -66,6 +66,6 @@ done
 tar -czvf "$backupFileName" "${toBackup[@]}"
 
 # [TASK 13] file is created 
-mv "$backupFileName" "$destAbsPath"
+mv "$backupFileName" "$destDirAbsPath"
 
 # Congratulations! You completed the final project for this course!
