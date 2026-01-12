@@ -62,8 +62,10 @@ do
   fi
 done
 
-# [TASK 12]
+# [TASK 12] compress and archive the files
+tar -czvf "$backupFileName" "${toBackup[@]}"
 
-# [TASK 13]
+# [TASK 13] file is created 
+mv "$backupFileName" "$destAbsPath"
 
 # Congratulations! You completed the final project for this course!
